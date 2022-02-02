@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Room from "../components/Room";
+import Loader from "../components/Loader";
 
 function Home() {
   const [rooms, setRooms] = useState([]);
@@ -23,13 +24,21 @@ function Home() {
   return (
     <div>
       <h1>Home</h1>
-      {loading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
-      {rooms.map((room) => (
-        <div className={"col-md-12"}>
-          <Room key={room.id} room={room} />
+      {loading && (
+        <p>
+          <Loader />
+        </p>
+      )}
+      {
+        rooms.length > 1 &&
+        <div>
+          {rooms.map((room) => (
+            <Room key={room.id} room={room} />
+          ))}
         </div>
-      ))}
+      }
+
+      {error && <p className={"alert alert-danger"}>{error}</p>}
     </div>
   );
 }
