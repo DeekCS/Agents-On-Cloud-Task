@@ -4,15 +4,19 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Home from "./screens/Home";
 import Booking from "./screens/Booking";
+import Register from "./screens/Register";
+import Login from "./screens/Login";
 function App() {
   return (
     <div className="App">
-      <Navbar />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
+          <Navbar />
+          <Routes>
+              <Route path="/" element={<Home />} />
             {/*<Route path="/booking" element={<Booking />} />*/}
-            <Route path="/booking/:id" exact element={<Booking />} />
+            <Route path="/booking/:id/:fromDate/:toDate" exact element={<Booking />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route path="/login" exact element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
