@@ -6,6 +6,7 @@ import Booking from "./screens/Booking";
 import Register from "./screens/Register";
 import Login from "./screens/Login";
 import Profile from "./screens/Profile";
+import Admin from "./screens/Admin";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/register" exact element={<Register />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/profile" exact element={<Profile />} />
+          <Route path="/admin" exact element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </div>

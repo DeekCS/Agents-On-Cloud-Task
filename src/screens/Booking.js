@@ -58,7 +58,6 @@ function Booking() {
         totalDays,
         token
       }
-    // bookRoom();
     try {
       setLoading(true);
       const data = (await axios.post("/api/booking/bookRoom", bookingDetails)).data;
