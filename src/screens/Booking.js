@@ -26,6 +26,12 @@ function Booking() {
   let stripeKey = `pk_test_51JsZdpHW9ZIm3OT3lbNjgEW6Hzb0Wl5IuDC6gi2KDYfZAJ2yIJYlzb2ZFsCr2x18uhdjrXBm6dD5ujKrTLEBhCxw0033UEPomc`;
 
   useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("token"));
+
+    if (!user) {
+      navigate("/login");
+    }
+
     const fetchData = async () => {
       try {
         setLoading(true);
