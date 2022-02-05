@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link,useNavigate } from "react-router-dom";
 import axios from "axios";
 import Room from "../components/Room";
 import Loader from "../components/Loader";
 import Error from "../components/Error";
 import moment from "moment";
+import StripeCheckout from 'react-stripe-checkout';
+import Swal from 'sweetalert2'
 
 function Booking() {
+
   const [room, setRoom] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
   const [totalAmount, setTotalAmount] = useState(0);
   const { id, fromDate, toDate } = useParams();
 
+  const navigate = useNavigate();
+
   const totalDays = moment.duration(
     moment(toDate).diff(moment(fromDate)) //calculate the difference between the dates in days
   ).asDays()+1;
 
 
-
+  let stripeKey = `pk_test_51JsZdpHW9ZIm3OT3lbNjgEW6Hzb0Wl5IuDC6gi2KDYfZAJ2yIJYlzb2ZFsCr2x18uhdjrXBm6dD5ujKrTLEBhCxw0033UEPomc`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,20 +40,38 @@ function Booking() {
     fetchData().then((r) => console.log(r));
   }, [id]);
 
-  const bookRoom = async () => {
-   const bookingDetails = {
-     room,
-     userId:JSON.parse(localStorage.getItem("token"))._id,
-     fromDate,
-     toDate,
-     totalAmount,
-     totalDays
-   }
+
+
+  const  onToken  =  async (token) => {
+      const bookingDetails = {
+        room,
+        userId:JSON.parse(localStorage.getItem("token"))._id,
+        fromDate,
+        toDate,
+        totalAmount,
+        totalDays,
+        token
+      }
+    // bookRoom();
     try {
+      setLoading(true);
       const data = (await axios.post("/api/booking/bookRoom", bookingDetails)).data;
+      setLoading(false);
+      Swal.fire({
+        title: 'Booking Successful',
+        text: 'Your booking has been confirmed',
+        icon: 'success',
+      }).then(() => {
+        navigate("/bookings");
+      })
       console.log(data);
     } catch (er) {
-      setError(er);
+      setLoading(false);
+      Swal.fire({
+        title: 'Booking Failed',
+        text: 'Please try again',
+        icon: 'error',
+      })
     }
   };
   return (
@@ -107,7 +130,15 @@ function Booking() {
                 </b>
               </div>
               <div>
-                <button className="btn btn-primary" onClick={bookRoom}>Pay Now</button>
+
+                <StripeCheckout
+                    token={onToken}
+                    currency="usd"
+                    amount={totalAmount * 100}
+                    stripeKey="pk_test_51JsZdpHW9ZIm3OT3lbNjgEW6Hzb0Wl5IuDC6gi2KDYfZAJ2yIJYlzb2ZFsCr2x18uhdjrXBm6dD5ujKrTLEBhCxw0033UEPomc"
+                >
+                  <button className="btn btn-primary">Pay Now</button>
+                </StripeCheckout>
               </div>
             </div>
           </>
