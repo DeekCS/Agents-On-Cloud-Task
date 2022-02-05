@@ -25,7 +25,7 @@ const Landing = () => {
             Agents Booking
           </h2>
           <h4 className={"text-white mt-2"} data-aos={'zoom-out'}>
-            "The best web app to book a home is to find the right agent."
+            "The best web app to book a Room is to find the right agent."
           </h4>
           <Link to={"/booking"}>
             <button className="btn btn-light mt-3">Book a home</button>
