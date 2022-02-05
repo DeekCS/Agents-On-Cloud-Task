@@ -5,6 +5,11 @@ import Success from "../components/Success";
 import Loader from "../components/Loader";
 
 export default function Login() {
+
+  useEffect(() => {
+    document.title = "Agents | Login";
+  }, []);
+
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);

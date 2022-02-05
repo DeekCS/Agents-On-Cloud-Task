@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { Button, Carousel, Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
+AOS.init(
+    {
+      duration: 1000,
+      easing: "ease-in-out",
+      once: true
+    }
+  );
 function Room({ room, fromDate, toDate }) {
   const [show, setShow] = useState(false);
 
@@ -9,7 +18,7 @@ function Room({ room, fromDate, toDate }) {
   const handleShow = () => setShow(true);
 
   return (
-    <div className={"container "}>
+    <div className={"container"} data-aos="fade-up">
       <div
         className={
           "row justify-content-center align-content-center mt-5 box-shadow"

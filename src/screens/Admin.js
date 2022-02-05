@@ -9,6 +9,11 @@ import Swal from "sweetalert2";
 const { TabPane } = Tabs;
 
 export default function Admin() {
+
+  useEffect(() => {
+    document.title = "Agents | Admin";
+  }, []);
+
   const navigate = useNavigate();
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("token")).isAdmin;

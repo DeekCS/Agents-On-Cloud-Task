@@ -4,6 +4,11 @@ import Loader from "../components/Loader";
 import Error from "../components/Error";
 import Success from "../components/Success";
 export default function Register() {
+
+  useEffect(() => {
+    document.title = "Agents | Register";
+  }, []);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");

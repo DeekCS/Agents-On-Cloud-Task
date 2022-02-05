@@ -67,7 +67,7 @@ function Booking() {
         text: 'Your booking has been confirmed',
         icon: 'success',
       }).then(() => {
-        navigate("/bookings");
+        navigate("/booking");
       })
       console.log(data);
     } catch (er) {

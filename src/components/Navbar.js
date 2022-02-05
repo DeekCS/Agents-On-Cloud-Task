@@ -31,10 +31,10 @@ function Navbar() {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
+              <li className="nav-item m-3 ">
                 {user ? (
                   <>
-                    <div className="dropdown">
+                    <div className="dropdown ">
                       <button
                         className="btn btn-secondary dropdown-toggle"
                         type="button"

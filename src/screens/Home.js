@@ -5,10 +5,24 @@ import Loader from "../components/Loader";
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import moment from "moment";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const { RangePicker } = DatePicker;
 
+AOS.init(
+    {
+      duration: 2000,
+      easing: "ease-in-out",
+      once: true
+    }
+);
+
 function Home() {
+  useEffect(() => {
+    document.title = "Agents | Booking";
+  }, []);
+
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
@@ -120,7 +134,6 @@ function Home() {
         </div>
       </div>
       <div className={"row justify-content-center mt-5"}>
-        <h1>Home</h1>
         {loading && (
           <p>
             <Loader />

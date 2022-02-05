@@ -7,6 +7,7 @@ import Register from "./screens/Register";
 import Login from "./screens/Login";
 import Profile from "./screens/Profile";
 import Admin from "./screens/Admin";
+import Landing from "./screens/Landing";
 
 function App() {
   return (
@@ -14,8 +15,7 @@ function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
-          {/*<Route path="/booking" element={<Booking />} />*/}
+          <Route path="/booking" element={<Home />} />
           <Route
             path="/booking/:id/:fromDate/:toDate"
             exact
@@ -25,6 +25,7 @@ function App() {
           <Route path="/login" exact element={<Login />} />
           <Route path="/profile" exact element={<Profile />} />
           <Route path="/admin" exact element={<Admin />} />
+          <Route path="/" exact element={<Landing/>} />
         </Routes>
       </BrowserRouter>
     </div>
